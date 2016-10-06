@@ -11,7 +11,6 @@ import UIKit
 class MainViewController: UIViewController {
     
     let reuseIdentifier = "MainCell"
-    weak var mainCell : UICollectionViewCell!
     
     override func viewDidLoad() {
         super.viewDidLoad()
