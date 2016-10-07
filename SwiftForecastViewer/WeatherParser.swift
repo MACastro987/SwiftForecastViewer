@@ -17,14 +17,11 @@ class WeatherParser {
         guard let json = json else { return nil }
         guard let observe = json["current_observation"] as? [String: Any] else { return nil }
         
-        // LOCATION
         guard let location = observe["display_location"] as? [String: Any] else { return nil }
         guard let full = location["full"] as? String else { return nil }
         
-        // WEATHER - As in "Mosty Cloudy"
         guard let weather = observe["weather"] as? String else { return nil }
-        
-        // TEMP
+
         let keyT = units == 0 ? "temp_f" : "temp_c"
         guard let temp = observe[keyT] as? Float else { return nil }
         

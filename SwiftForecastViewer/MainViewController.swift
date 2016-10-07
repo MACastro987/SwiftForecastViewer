@@ -9,6 +9,9 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var weatherLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     
     let reuseIdentifier = "MainCell"
         
@@ -20,6 +23,10 @@ class MainViewController: UIViewController {
         weatherRequest.requestWeather(forKey: .conditions)
     }
     
+    func updateCurrentConditionLabels(data: CurrentDisplayData) {
+        print("\(data)")
+        
+    }
 
 }
 

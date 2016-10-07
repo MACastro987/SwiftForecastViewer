@@ -49,6 +49,28 @@ struct WeatherRequest {
         
         let parser = WeatherParser()
         let currentDisplayData = parser.currentDisplayDataFrom(json: json!)
-        print("currentDisplayData = \(currentDisplayData)")
+        self.updateCurrentDiplayWith(data: currentDisplayData!)
+    }
+    
+    func updateCurrentDiplayWith(data: CurrentDisplayData) {
+        let main = MainViewController()
+        main.updateCurrentConditionLabels(data: data)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
