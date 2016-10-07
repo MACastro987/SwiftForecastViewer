@@ -13,7 +13,6 @@ enum WeatherKeys : String {
 }
 
 struct WeatherRequest {
-    
     let baseUrl = "api.wunderground.com"
     let apiKey = "4aa1b354ada978c6"
     let currentWeatherkey = "current_observation"
@@ -25,15 +24,12 @@ struct WeatherRequest {
         let testUrl = URL(string: "http://api.wunderground.com/api/4aa1b354ada978c6/conditions/q/CA/San_Francisco.json")
               
         let req = NSMutableURLRequest(url: testUrl!)
-        
-        req.httpMethod = "GET"
-
         URLSession.shared.dataTask(with: req as URLRequest) { data, response, error in
             if error != nil {
-                //Your HTTP request failed.
+                //Error
                 print(error?.localizedDescription)
             } else {
-                //Your HTTP request succeeded
+                //Success
                 print(String(data: data!, encoding: String.Encoding.utf8))
                 
                 self.parse(data: data!)
@@ -51,7 +47,8 @@ struct WeatherRequest {
             print("Error is \(error.localizedDescription)")
         }
         
-        let parser = CurrentWeatherParser()
-        let current = parser.currentFrom(json: json!)
+        let parser = WeatherParser()
+        let currentDisplayData = parser.currentDisplayDataFrom(json: json!)
+        print("currentDisplayData = \(currentDisplayData)")
     }
 }
