@@ -11,10 +11,16 @@ import UIKit
 class MainViewController: UIViewController {
     
     let reuseIdentifier = "MainCell"
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let weatherRequest = WeatherRequest()
+        
+        weatherRequest.requestWeather(forKey: .conditions)
     }
+    
+
 }
 
 // MARK: - UICollectionViewDataSource
@@ -33,5 +39,4 @@ extension MainViewController: UICollectionViewDataSource {
         
         return cell
     }
-
 }
