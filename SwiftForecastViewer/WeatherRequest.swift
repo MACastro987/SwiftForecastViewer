@@ -53,8 +53,8 @@ struct WeatherRequest {
     }
     
     func updateCurrentDiplayWith(data: CurrentDisplayData) {
-        let main = MainViewController()
-        main.updateCurrentConditionLabels(data: data)
+        let notificationName = Notification.Name("UpdateUI")
+        NotificationCenter.default.post(name: notificationName, object: data)
     }
 }
 

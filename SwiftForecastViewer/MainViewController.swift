@@ -21,13 +21,13 @@ class MainViewController: UIViewController {
         let weatherRequest = WeatherRequest()
         
         weatherRequest.requestWeather(forKey: .conditions)
+                
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateUI(notification:)), name: NSNotification.Name(rawValue: "UpdateUI"), object: nil)
     }
     
-    func updateCurrentConditionLabels(data: CurrentDisplayData) {
-        print("\(data)")
-        
+    func updateUI(notification: Notification) {
+        print(notification)
     }
-
 }
 
 // MARK: - UICollectionViewDataSource
