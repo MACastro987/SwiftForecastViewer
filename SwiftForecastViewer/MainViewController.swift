@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
-    
+        
     let reuseIdentifier = "MainCell"
         
     override func viewDidLoad() {
@@ -21,12 +21,23 @@ class MainViewController: UIViewController {
         let weatherRequest = WeatherRequest()
         
         weatherRequest.requestWeather(forKey: .conditions)
-                
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateUI(notification:)), name: NSNotification.Name(rawValue: "UpdateUI"), object: nil)
+//        weatherRequest.requestWeather(forKey: .hourly)
+        
+        let notificationName = Notification.Name("UpdateUI")
+
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateUI(notification:)), name: notificationName, object: nil)
     }
     
     func updateUI(notification: Notification) {
-        print(notification)
+        let currentArray: CurrentDisplayData = notification.object as! CurrentDisplayData
+        
+        DispatchQueue.global().async {
+            DispatchQueue.main.async {
+                self.tempLabel.text = currentArray.temperature
+                self.weatherLabel.text = currentArray.weather
+                self.locationLabel.text = currentArray.cityAndState
+            }
+        }
     }
 }
 

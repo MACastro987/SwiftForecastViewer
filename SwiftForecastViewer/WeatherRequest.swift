@@ -10,6 +10,7 @@ import Foundation
 
 enum WeatherKeys : String {
     case conditions = "conditions"
+    case hourly = "hourly"
 }
 
 struct WeatherRequest {
@@ -19,9 +20,9 @@ struct WeatherRequest {
     
     func requestWeather(forKey key: WeatherKeys) -> Void {
         
-//        let url = URL(string: "http://\(baseUrl)/api/\(apiKey)/\(currentWeatherkey)/q/\(state)/\(city).json")
+        //let url = URL(string: "http://\(baseUrl)/api/\(apiKey)/\(currentWeatherkey)/q/\(state)/\(city).json")
         
-        let testUrl = URL(string: "http://api.wunderground.com/api/4aa1b354ada978c6/conditions/q/CA/San_Francisco.json")
+        let testUrl = URL(string: "http://api.wunderground.com/api/4aa1b354ada978c6/\(key)/q/CA/San_Francisco.json")
               
         let req = NSMutableURLRequest(url: testUrl!)
         URLSession.shared.dataTask(with: req as URLRequest) { data, response, error in
@@ -30,14 +31,14 @@ struct WeatherRequest {
                 print(error?.localizedDescription)
             } else {
                 //Success
-                print(String(data: data!, encoding: String.Encoding.utf8))
+                //print(String(data: data!, encoding: String.Encoding.utf8))
                 
-                self.parse(data: data!)
+                self.parse(data: data!, givenCase: key)
             }
         }.resume()
     }
     
-    func parse(data: Data) {
+    func parse(data: Data, givenCase: WeatherKeys) {
         let json: [String: Any]?
         
         do {
@@ -48,8 +49,17 @@ struct WeatherRequest {
         }
         
         let parser = WeatherParser()
-        let currentDisplayData = parser.currentDisplayDataFrom(json: json!)
-        self.updateCurrentDiplayWith(data: currentDisplayData!)
+        
+        switch givenCase {
+            
+        case .conditions:
+            print("fetching current conditions")
+            let currentDisplayData = parser.currentDisplayDataFrom(json: json!)
+            self.updateCurrentDiplayWith(data: currentDisplayData!)
+            
+        case .hourly:
+            print("fetching hourly forecast")
+        }       
     }
     
     func updateCurrentDiplayWith(data: CurrentDisplayData) {
