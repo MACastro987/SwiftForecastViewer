@@ -18,18 +18,26 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let weatherRequest = WeatherRequest()
-        
-        weatherRequest.requestWeather(forKey: .conditions)
-//        weatherRequest.requestWeather(forKey: .hourly)
-        
-        let notificationName = Notification.Name("UpdateUI")
-
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateUI(notification:)), name: notificationName, object: nil)
+        self.requestWeather()
+        self.setupNotifications()
     }
     
-    func updateUI(notification: Notification) {
-        let currentArray: CurrentDisplayData = notification.object as! CurrentDisplayData
+    // MARK: - Helpers
+    func requestWeather() {
+        let weatherRequest = WeatherRequest()
+        weatherRequest.requestWeather(forKey: .conditions)
+        weatherRequest.requestWeather(forKey: .hourly)
+    }
+    
+    func setupNotifications() {
+        let backgroundLabelDataNotif = Notification.Name("UpdateBackground")
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateBackgroundUI(notification:)), name: backgroundLabelDataNotif, object: nil)
+        let collectionViewDataNotif = Notification.Name("UpdateCollectionView")
+        NotificationCenter.default.addObserver(self, selector: #selector(self.updateCollectionView(notification:)), name: collectionViewDataNotif, object: nil)
+    }
+    
+    func updateBackgroundUI(notification: Notification) {
+        let currentArray: currentDisplayData = notification.object as! currentDisplayData
         
         DispatchQueue.global().async {
             DispatchQueue.main.async {
@@ -38,6 +46,10 @@ class MainViewController: UIViewController {
                 self.locationLabel.text = currentArray.cityAndState
             }
         }
+    }
+    
+    func updateCollectionView(notification: Notification) {
+        print(notification)
     }
 }
 

@@ -55,16 +55,25 @@ struct WeatherRequest {
         case .conditions:
             print("fetching current conditions")
             let currentDisplayData = parser.currentDisplayDataFrom(json: json!)
-            self.updateCurrentDiplayWith(data: currentDisplayData!)
+            self.notifyCurrentDiplay(data: currentDisplayData!)
             
         case .hourly:
             print("fetching hourly forecast")
-        }       
+            let forecastData = parser.forecastDataFrom(json: json!)
+            self.notifyCollectionView(forecast: forecastData)
+        }
     }
     
-    func updateCurrentDiplayWith(data: CurrentDisplayData) {
+    // MARK: - Data Nofications
+    
+    func notifyCurrentDiplay(data: currentDisplayData) {
         let notificationName = Notification.Name("UpdateUI")
         NotificationCenter.default.post(name: notificationName, object: data)
+    }
+
+    func notifyCollectionView(forecast: forecastData) {
+        let notificationName = Notification.Name("UpdateCollectionView")
+        NotificationCenter.default.post(name: notificationName, object: forecast)
     }
 }
 
