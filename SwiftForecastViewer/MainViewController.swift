@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
         self.setupNotifications()
     }
     
+    
     // MARK: - Helpers
     func requestWeather() {
         let weatherRequest = WeatherRequest()

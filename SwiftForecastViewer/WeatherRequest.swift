@@ -67,7 +67,7 @@ struct WeatherRequest {
     // MARK: - Data Nofications
     
     func notifyCurrentDiplay(data: currentDisplayData) {
-        let notificationName = Notification.Name("UpdateUI")
+        let notificationName = Notification.Name("UpdateBackground")
         NotificationCenter.default.post(name: notificationName, object: data)
     }
 
@@ -76,20 +76,3 @@ struct WeatherRequest {
         NotificationCenter.default.post(name: notificationName, object: forecast)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
