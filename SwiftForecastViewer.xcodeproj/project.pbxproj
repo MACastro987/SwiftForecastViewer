@@ -107,6 +107,7 @@
 			children = (
 				3A3A056C1DA5CD4D006706B2 /* AppDelegate.swift */,
 				3A3A059C1DA5D910006706B2 /* Controller */,
+				3A3A05AA1DA7CA12006706B2 /* WUndergroundUtillity */,
 				3A3A059D1DA5D929006706B2 /* View */,
 				3A3A05731DA5CD4D006706B2 /* Assets.xcassets */,
 				3A3A05781DA5CD4D006706B2 /* Info.plist */,
@@ -154,7 +155,6 @@
 			isa = PBXGroup;
 			children = (
 				3A3A056E1DA5CD4D006706B2 /* MainViewController.swift */,
-				3A3A05AA1DA7CA12006706B2 /* WUndergroundUtillity */,
 			);
 			name = Main;
 			sourceTree = "<group>";

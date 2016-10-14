@@ -111,6 +111,20 @@
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="L0f-nl-J0e">
                                                 <frame key="frameInset"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPu-62-gEm">
+                                                        <frame key="frameInset" minX="46" minY="318" width="282" height="30"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <state key="normal" title="RETURN TO MAIN"/>
+                                                        <connections>
+                                                            <segue destination="tga-uJ-G9f" kind="unwind" unwindAction="returnFromSettingsSegue:" id="3ya-rV-NBR"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="ilk-qz-v48" appends="YES" id="So9-eD-ABr"/>
+                                                </connections>
                                             </view>
                                             <vibrancyEffect>
                                                 <blurEffect style="light"/>
@@ -121,14 +135,6 @@
                                 <color key="backgroundColor" white="0.10390111019736842" alpha="1" colorSpace="calibratedWhite"/>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPu-62-gEm">
-                                <frame key="frameInset" minX="20" minY="28" width="282" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="RETURN TO MAIN"/>
-                                <connections>
-                                    <segue destination="tga-uJ-G9f" kind="unwind" unwindAction="returnFromSettingsSegue:" id="3ya-rV-NBR"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -138,9 +144,17 @@
                             <constraint firstItem="YGG-VK-ZCM" firstAttribute="width" secondItem="pYG-Bn-WSg" secondAttribute="width" id="tTC-Im-UqV"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="blurView" destination="NwB-3s-NLH" id="qmH-LO-P5V"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xms-2y-4FO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="tga-uJ-G9f" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="ilk-qz-v48">
+                    <connections>
+                        <action selector="handleTapWithRecognizer:" destination="jCx-pC-gdO" id="NGk-2Z-aXS"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="804" y="121.88905547226388"/>
         </scene>

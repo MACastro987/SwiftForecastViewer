@@ -10,7 +10,13 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+    @IBOutlet weak var blurView: UIVisualEffectView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    @IBAction func handleTap(recognizer:UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

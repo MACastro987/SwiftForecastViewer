@@ -9,6 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
+    
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
@@ -22,14 +23,14 @@ class MainViewController: UIViewController {
         self.setupNotifications()
     }
     
-    
-    // MARK: - Helpers
+    // MARK: - WeatherRequests
     func requestWeather() {
         let weatherRequest = WeatherRequest()
         weatherRequest.requestWeather(forKey: .conditions)
         weatherRequest.requestWeather(forKey: .hourly)
     }
     
+    // MARK: - Notifications
     func setupNotifications() {
         let backgroundLabelDataNotif = Notification.Name("UpdateBackground")
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateBackgroundUI(notification:)), name: backgroundLabelDataNotif, object: nil)
