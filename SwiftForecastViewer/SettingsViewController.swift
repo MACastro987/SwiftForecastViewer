@@ -10,10 +10,42 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
-    @IBOutlet weak var blurView: UIVisualEffectView!
+    
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var getWeatherButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setupTextView()
+        self.setupSegmentedControl()
+    }
+    
+    func setupSegmentedControl() {
+        let attr = NSDictionary(object: UIFont(name: "Avenir Next", size: 12.0)!, forKey: NSFontAttributeName as NSCopying)
+        self.segmentedControl.setTitleTextAttributes(attr as? [AnyHashable : Any], for: .normal)
+    }
+    
+    func setupVisualEffects() {
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        view.addSubview(blurEffectView)
+        
+//        var vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
+        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+        vibrancyEffectView.frame = view.bounds
+        
+        // Add the vibrancy view to the blur view
+        blurEffectView.contentView.addSubview(vibrancyEffectView)
+    }
+    
+    func setupTextView() {
+        textView.textContainer.maximumNumberOfLines = 1
+        textView.layer.cornerRadius = 10
     }
     
     @IBAction func handleTap(recognizer:UITapGestureRecognizer) {
