@@ -20,6 +20,7 @@ class SettingsViewController: UIViewController {
         
         self.setupTextView()
         self.setupSegmentedControl()
+        self.setupVisualEffects()
     }
     
     func setupSegmentedControl() {
@@ -29,17 +30,24 @@ class SettingsViewController: UIViewController {
     
     func setupVisualEffects() {
         
+//        let blurEffect = UIBlurEffect(style: UIBlurEffect.)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = view.bounds
+//        view.addSubview(blurEffectView)
+        
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
-        view.addSubview(blurEffectView)
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        view.insertSubview(blurEffectView, at: 0)
+//        view.addSubview(blurEffectView)
         
-//        var vibrancyEffect = UIVibrancyEffect(forBlurEffect: blurEffect)
+
         let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
         let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
         vibrancyEffectView.frame = view.bounds
         
-        // Add the vibrancy view to the blur view
+        //Add the vibrancy view to the blur view
         blurEffectView.contentView.addSubview(vibrancyEffectView)
     }
     

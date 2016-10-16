@@ -97,7 +97,7 @@
                         <viewControllerLayoutGuide type="top" id="DxI-qX-4TV"/>
                         <viewControllerLayoutGuide type="bottom" id="joJ-MQ-hyQ"/>
                     </layoutGuides>
-                    <view key="view" opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" id="pYG-Bn-WSg">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="pYG-Bn-WSg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -129,6 +129,7 @@
                             </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Gwt-GR-2Iz" secondAttribute="trailing" constant="1" id="0Pi-pd-UE4"/>
                             <constraint firstItem="Gwt-GR-2Iz" firstAttribute="top" secondItem="DxI-qX-4TV" secondAttribute="bottom" constant="25" id="HY3-Pq-gyq"/>
@@ -138,6 +139,9 @@
                             <constraint firstItem="Z2P-ww-gsm" firstAttribute="top" secondItem="Lrq-dh-8lQ" secondAttribute="bottom" constant="25" id="ggC-CM-Rh2"/>
                             <constraint firstItem="Z2P-ww-gsm" firstAttribute="centerX" secondItem="pYG-Bn-WSg" secondAttribute="centerX" id="pX7-eI-uoV"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="e2R-cr-HQa" appends="YES" id="sLo-v4-WuV"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="getWeatherButton" destination="Z2P-ww-gsm" id="qAT-he-629"/>
@@ -146,9 +150,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xms-2y-4FO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="ilk-qz-v48">
+                <tapGestureRecognizer id="e2R-cr-HQa">
                     <connections>
-                        <action selector="handleTapWithRecognizer:" destination="jCx-pC-gdO" id="NGk-2Z-aXS"/>
+                        <action selector="handleTapWithRecognizer:" destination="jCx-pC-gdO" id="w9H-fc-3oU"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
