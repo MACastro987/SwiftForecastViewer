@@ -17,8 +17,7 @@ class MainViewController: UIViewController {
     let reuseIdentifier = "MainCell"
         
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
         self.requestWeather()
         self.setupNotifications()
     }

@@ -8,8 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
-
+class SettingsViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -24,25 +23,17 @@ class SettingsViewController: UIViewController {
     }
     
     func setupSegmentedControl() {
-        let attr = NSDictionary(object: UIFont(name: "Avenir Next", size: 12.0)!, forKey: NSFontAttributeName as NSCopying)
+        let attr = NSDictionary(object: UIFont(name: "Avenir Next", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
         self.segmentedControl.setTitleTextAttributes(attr as? [AnyHashable : Any], for: .normal)
     }
     
     func setupVisualEffects() {
-        
-//        let blurEffect = UIBlurEffect(style: UIBlurEffect.)
-//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        blurEffectView.frame = view.bounds
-//        view.addSubview(blurEffectView)
-        
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurEffectView, at: 0)
-//        view.addSubview(blurEffectView)
         
-
         let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
         let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
         vibrancyEffectView.frame = view.bounds
@@ -54,6 +45,12 @@ class SettingsViewController: UIViewController {
     func setupTextView() {
         textView.textContainer.maximumNumberOfLines = 1
         textView.layer.cornerRadius = 10
+        textView.text = "Enter Your Zip Code"
+        textView.textColor = UIColor.lightGray
+    }
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
     }
     
     @IBAction func handleTap(recognizer:UITapGestureRecognizer) {
