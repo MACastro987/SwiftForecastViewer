@@ -15,11 +15,26 @@ class MainViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
         
     let reuseIdentifier = "MainCell"
+    
+    //testing
+    var unitsFahrenheit = true
         
     override func viewDidLoad() {
         super.viewDidLoad()        
         self.requestWeather()
         self.setupNotifications()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("Units Fahrenheit? : \(unitsFahrenheit)")
+    }
+    
+    // MARK: - Unwind
+    @IBAction func unwindWithUnitsOfMeasure (sender: UIStoryboardSegue) {
+        if sender.source is SettingsViewController {
+            let settings = sender.source as! SettingsViewController
+            print(" is fahrenheit : \(settings.isFahrenheitSelected)")
+        }
     }
     
     // MARK: - WeatherRequests
@@ -31,8 +46,10 @@ class MainViewController: UIViewController {
     
     // MARK: - Notifications
     func setupNotifications() {
+        // Background Labelsk
         let backgroundLabelDataNotif = Notification.Name("UpdateBackground")
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateBackgroundUI(notification:)), name: backgroundLabelDataNotif, object: nil)
+        // CollectionView Data
         let collectionViewDataNotif = Notification.Name("UpdateCollectionView")
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateCollectionView(notification:)), name: collectionViewDataNotif, object: nil)
     }

@@ -12,11 +12,11 @@ class SettingsViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBOutlet weak var getWeatherButton: UIButton!
-
+    
+    public var isFahrenheitSelected = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setupTextView()
         self.setupSegmentedControl()
         self.setupVisualEffects()
@@ -55,5 +55,13 @@ class SettingsViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func handleTap(recognizer:UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func segmentedControlTap(_ sender: AnyObject) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            isFahrenheitSelected = true
+        } else if segmentedControl.selectedSegmentIndex == 1 {
+            isFahrenheitSelected = false
+        }
     }
 }
