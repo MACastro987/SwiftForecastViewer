@@ -22,6 +22,12 @@ class SettingsViewController: UIViewController, UITextViewDelegate {
         self.setupVisualEffects()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if let segIndex = UserDefaults.standard.value(forKey: "SegmentedControlIndexSelected") as? Int {
+            segmentedControl.selectedSegmentIndex = segIndex
+        }
+    }
+    
     func setupSegmentedControl() {
         let attr = NSDictionary(object: UIFont(name: "Avenir Next", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
         self.segmentedControl.setTitleTextAttributes(attr as? [AnyHashable : Any], for: .normal)
@@ -58,10 +64,33 @@ class SettingsViewController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func segmentedControlTap(_ sender: AnyObject) {
-        if segmentedControl.selectedSegmentIndex == 0 {
+        let index = segmentedControl.selectedSegmentIndex
+        self.saveSelectedIndex(index: index)
+
+        if index == 0 {
             isFahrenheitSelected = true
-        } else if segmentedControl.selectedSegmentIndex == 1 {
+        } else if index == 1 {
             isFahrenheitSelected = false
         }
     }
+    
+    func saveSelectedIndex(index: Int) {
+        let defualts = UserDefaults.standard
+        defualts.set(index, forKey: "SegmentedControlIndexSelected")
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
