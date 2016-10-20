@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITextViewDelegate {
+class SettingsViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     public var isFahrenheitSelected = true
@@ -33,6 +33,7 @@ class SettingsViewController: UIViewController, UITextViewDelegate {
         self.segmentedControl.setTitleTextAttributes(attr as? [AnyHashable : Any], for: .normal)
     }
     
+    // MARK: - Blur & Vibrancy
     func setupVisualEffects() {
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -48,22 +49,54 @@ class SettingsViewController: UIViewController, UITextViewDelegate {
         blurEffectView.contentView.addSubview(vibrancyEffectView)
     }
     
+    // MARK: - Text Field
     func setupTextView() {
-        textView.textContainer.maximumNumberOfLines = 1
-        textView.layer.cornerRadius = 10
-        textView.text = "Enter Your Zip Code"
-        textView.textColor = UIColor.lightGray
-        textView.keyboardType = UIKeyboardType.numberPad
-    }
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = ""
+        textField.layer.cornerRadius = 10
+        textField.text = "Enter Your Zip Code"
+        textField.textColor = UIColor.lightGray
+        textField.keyboardType = UIKeyboardType.numberPad
+        
+        textField.inputAccessoryView = accessoryView()
+        textField.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
+        self.view.addSubview(textField)
     }
     
+    func accessoryView () -> UIView {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        
+        let doneButton = UIButton()
+        doneButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
+        doneButton.backgroundColor = UIColor.clear
+        doneButton.layer.cornerRadius = 10
+        doneButton.titleLabel?.font = UIFont (name: "Avenir Next", size: 20.0)
+        doneButton.layer.borderWidth = 1.0
+        doneButton.layer.borderColor = UIColor(white: 1.0, alpha: 0.4).cgColor
+        doneButton.setTitle("done", for: .normal)
+        doneButton.addTarget(self, action: #selector(SettingsViewController.doneAction), for: .touchUpInside)
+        view.addSubview(doneButton)
+        
+        return view
+    }
+    
+    func doneAction () {
+        textField.resignFirstResponder()
+        
+        // save input to userdefaults
+        let defaults = UserDefaults.standard
+        defaults.set(textField.text, forKey: "ZipcodeInput")
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.text = ""
+    }
+ 
+    // MARK: Tap Gesture
     @IBAction func handleTap(recognizer:UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    // MARK: Semented Control
     @IBAction func segmentedControlTap(_ sender: AnyObject) {
         let index = segmentedControl.selectedSegmentIndex
         self.saveSelectedIndex(index: index)
