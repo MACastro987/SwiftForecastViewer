@@ -59,7 +59,7 @@ class MainViewController: UIViewController {
         
         DispatchQueue.global().async {
             DispatchQueue.main.async {
-                self.tempLabel.text = currentArray.temperature
+                self.tempLabel.text = currentArray.english
                 self.weatherLabel.text = currentArray.weather
                 self.locationLabel.text = currentArray.cityAndState
             }

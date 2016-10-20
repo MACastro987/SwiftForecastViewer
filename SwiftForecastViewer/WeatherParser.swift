@@ -22,16 +22,27 @@ class WeatherParser {
         guard let full = location["full"] as? String else { return nil }
         
         guard let weather = observe["weather"] as? String else { return nil }
+        
+        var english = ""
+        if let fahrenheit = observe["temp_f"] as? Float {
+            english = formatTemperature(temperature: fahrenheit)
+        }
+        
+        var metric = ""
+        if let celcius = observe["temp_c"] as? Float {
+            metric = formatTemperature(temperature: celcius)
+        }
 
-        let keyT = units == 0 ? "temp_f" : "temp_c"
-        guard let temp = observe[keyT] as? Float else { return nil }
-        
-        //Parse into formated string
-        let roundedTemp = Int(round(Double(temp)))
-        let tempString = "\(roundedTemp)\u{00B0}"
-        
-        
-        return currentDisplayData(temperature: tempString, cityAndState: full, weather: weather)
+        return currentDisplayData(english: english, metric: metric, cityAndState: full, weather: weather)
+    }
+    
+    // Current Data Helper
+    func formatTemperature(temperature: Float) -> String {
+        let roundedTemperature = round(temperature)
+        let intTemp = Int(roundedTemperature)
+        let degreeSymbolFormat = "\(intTemp)\u{00B0}"
+
+        return degreeSymbolFormat
     }
     
     func forecastDataFrom(json: [String: Any]?) -> forecastData {
@@ -72,7 +83,7 @@ class WeatherParser {
         return(hourDataByDayFrom(forecast: forecast))
     }
     
-    // Helper
+    // Forecast Helper
     
     func hourDataByDayFrom(forecast: Array<hourData>) -> forecastData {
         var todayForecast = Array<hourData>()

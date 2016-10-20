@@ -9,7 +9,8 @@
 import Foundation
 
 struct currentDisplayData {
-    let temperature: String
+    let english: String
+    let metric: String
     let cityAndState: String
     let weather: String
 }

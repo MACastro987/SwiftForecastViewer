@@ -6,32 +6,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SwiftForecastViewer/SettingsViewController.swift"
-            timestampString = "498539200.418463"
+            filePath = "SwiftForecastViewer/WeatherRequest.swift"
+            timestampString = "498669787.539971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "segmentedControlTap(_:)"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "parse(data:givenCase:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftForecastViewer.WeatherRequest.parse (data : Foundation.Data, givenCase : SwiftForecastViewer.WeatherKeys) -&gt; ()"
+                  moduleName = "SwiftForecastViewer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Macintosh%20HD/Users/michaelcastro/Desktop/Swift%20Projects/SwiftForecastViewer/SwiftForecastViewer/WeatherRequest.swift"
+                  timestampString = "498669912.243122"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "1355">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftForecastViewer.WeatherRequest.parse (data : Foundation.Data, givenCase : SwiftForecastViewer.WeatherKeys) -&gt; ()"
+                  moduleName = "SwiftForecastViewer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/Macintosh%20HD/Users/michaelcastro/Desktop/Swift%20Projects/SwiftForecastViewer/SwiftForecastViewer/WeatherRequest.swift"
+                  timestampString = "498669912.25429"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "1845">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SwiftForecastViewer/SettingsViewController.swift"
-            timestampString = "498539200.418463"
+            filePath = "SwiftForecastViewer/WeatherRequest.swift"
+            timestampString = "498670071.208665"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "segmentedControlTap(_:)"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "notifyCurrentDiplay(data:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
