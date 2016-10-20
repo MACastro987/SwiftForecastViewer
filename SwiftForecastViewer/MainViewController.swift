@@ -15,9 +15,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
         
     let reuseIdentifier = "MainCell"
-    
-    //testing
-    var unitsFahrenheit = true
+    var isFahrenheit = true
         
     override func viewDidLoad() {
         super.viewDidLoad()        
@@ -26,14 +24,44 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("Units Fahrenheit? : \(unitsFahrenheit)")
+        print("Main.isFahrenheit? : \(isFahrenheit)")
+        
     }
     
     // MARK: - Unwind
     @IBAction func unwindWithUnitsOfMeasure (sender: UIStoryboardSegue) {
         if sender.source is SettingsViewController {
             let settings = sender.source as! SettingsViewController
-            print(" is fahrenheit : \(settings.isFahrenheitSelected)")
+            print("settings.isFahrenheitSelecte : \(settings.isFahrenheitSelected)")
+            
+            if self.isFahrenheit != settings.isFahrenheitSelected {
+                self.isFahrenheit = settings.isFahrenheitSelected
+                
+                // Update tempLabel with change in units
+                self.upadateTempLabel()
+            }
+        }
+    }
+    
+    func upadateTempLabel() {
+        
+        if let tempValues = UserDefaults.standard.value(forKey: "CurrentTemperatureValues") as? NSDictionary {
+            let english = tempValues.value(forKey: "english") as! String
+            let metric = tempValues.value(forKey: "metric") as! String
+            
+            let temparature: String
+            switch isFahrenheit {
+            case true:
+                temparature = english
+            case false:
+                temparature = metric
+            }
+            
+            DispatchQueue.global().async {
+                DispatchQueue.main.async {
+                    self.tempLabel.text = temparature
+                }
+            }
         }
     }
     
@@ -46,7 +74,7 @@ class MainViewController: UIViewController {
     
     // MARK: - Notifications
     func setupNotifications() {
-        // Background Labelsk
+        // Background Labels
         let backgroundLabelDataNotif = Notification.Name("UpdateBackground")
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateBackgroundUI(notification:)), name: backgroundLabelDataNotif, object: nil)
         // CollectionView Data

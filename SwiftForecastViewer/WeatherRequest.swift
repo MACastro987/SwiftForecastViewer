@@ -49,6 +49,7 @@ struct WeatherRequest {
         }
         
         let parser = WeatherParser()
+        let defaults = UserDefaults.standard
         
         switch givenCase {
             
@@ -56,6 +57,14 @@ struct WeatherRequest {
             print("fetching current conditions")
             let currentDisplayData = parser.currentDisplayDataFrom(json: json!)
             self.notifyCurrentDiplay(data: currentDisplayData!)
+            
+            //Save a dictionary of temperatures 
+            let temps: [String: String] = [
+                "english": (currentDisplayData?.english)!,
+                "metric": (currentDisplayData?.metric)!
+            ]
+            
+            defaults.set(temps, forKey: "CurrentTemperatureValues")
             
         case .hourly:
             print("fetching hourly forecast")
