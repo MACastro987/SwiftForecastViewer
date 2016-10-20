@@ -53,6 +53,7 @@ class SettingsViewController: UIViewController, UITextViewDelegate {
         textView.layer.cornerRadius = 10
         textView.text = "Enter Your Zip Code"
         textView.textColor = UIColor.lightGray
+        textView.keyboardType = UIKeyboardType.numberPad
     }
 
     func textViewDidBeginEditing(_ textView: UITextView) {
