@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MainViewController: UIViewController {
     
@@ -30,20 +31,64 @@ class MainViewController: UIViewController {
     
     // MARK: - Unwind
     @IBAction func unwindWithUnitsOfMeasure (sender: UIStoryboardSegue) {
+        
         if sender.source is SettingsViewController {
             let settings = sender.source as! SettingsViewController
             print("settings.isFahrenheitSelecte : \(settings.isFahrenheitSelected)")
             
             if self.isFahrenheit != settings.isFahrenheitSelected {
                 self.isFahrenheit = settings.isFahrenheitSelected
-                
-                // Update tempLabel with change in units
-                self.upadateTempLabel()
             }
+            
+            // Update tempLabel with change in units
+            self.updateTempLabel()
+            
+            // Update locationLabel
+            self.updateLocationLabel()
         }
     }
     
-    func upadateTempLabel() {
+    func updateLocationLabel() {
+        // Get current zip code
+        if let zipString = (UserDefaults.standard.value(forKey: "ZipcodeInput")) as? String {
+            // Reverse geocode location name
+            let geocoder = CLGeocoder()
+            geocoder.geocodeAddressString(zipString, completionHandler: {(placemarks: [CLPlacemark]?, error: Error?) -> Void in
+                
+                let placeArray = placemarks as [CLPlacemark]!
+                
+                // Place details
+                var placeMark: CLPlacemark!
+                placeMark = placeArray?[0]
+                
+                // Address dictionary
+                print("Address Dict : \(placeMark.addressDictionary)")
+                
+                // Location name
+                var cityName = ""
+                if let city = placeMark.addressDictionary?["City"] as? String
+                {
+                    print(city)
+                    cityName = city
+                }
+                
+                var stateName = ""
+                if let state = placeMark.addressDictionary?["State"] as? String {
+                    print(state)
+                    stateName = state
+                }
+                
+                let cityAndState = "\(cityName), \(stateName)"
+                
+                DispatchQueue.global().async {
+                    DispatchQueue.main.async {
+                        self.locationLabel.text = cityAndState
+                    }
+                }
+            })}
+        }
+    
+    func updateTempLabel() {
         
         if let tempValues = UserDefaults.standard.value(forKey: "CurrentTemperatureValues") as? NSDictionary {
             let english = tempValues.value(forKey: "english") as! String

@@ -55,7 +55,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         textField.text = "Enter Your Zip Code"
         textField.textColor = UIColor.lightGray
         textField.keyboardType = UIKeyboardType.numberPad
-        
         textField.inputAccessoryView = accessoryView()
         textField.inputAccessoryView?.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44)
         self.view.addSubview(textField)
@@ -64,7 +63,6 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     func accessoryView () -> UIView {
         let view = UIView()
         view.backgroundColor = UIColor.clear
-        
         let doneButton = UIButton()
         doneButton.frame = CGRect(x: self.view.frame.width - 80, y: 7, width: 60, height: 30)
         doneButton.backgroundColor = UIColor.clear
