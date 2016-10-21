@@ -44,11 +44,11 @@ class MainViewController: UIViewController {
             self.updateTempLabel()
             
             // Update locationLabel
-            self.updateLocationLabel()
+            self.parseLocation()
         }
     }
     
-    func updateLocationLabel() {
+    func parseLocation() {
         // Get current zip code
         if let zipString = (UserDefaults.standard.value(forKey: "ZipcodeInput")) as? String {
             // Reverse geocode location name
@@ -80,13 +80,17 @@ class MainViewController: UIViewController {
                 
                 let cityAndState = "\(cityName), \(stateName)"
                 
-                DispatchQueue.global().async {
-                    DispatchQueue.main.async {
-                        self.locationLabel.text = cityAndState
-                    }
-                }
+                self.updateLocationLabel(with: cityAndState)
             })}
         }
+    
+    func updateLocationLabel(with string: String) {
+        DispatchQueue.global().async {
+            DispatchQueue.main.async {
+                self.locationLabel.text = string
+            }
+        }
+    }
     
     func updateTempLabel() {
         
