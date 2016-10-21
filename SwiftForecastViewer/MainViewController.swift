@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import CoreLocation
 
 class MainViewController: UIViewController {
@@ -48,6 +49,9 @@ class MainViewController: UIViewController {
         }
     }
     
+    // TODO: Encapsulate in Geocoder class
+    //************************************
+    
     func parseLocation() {
         // Get current zip code
         if let zipString = (UserDefaults.standard.value(forKey: "ZipcodeInput")) as? String {
@@ -66,23 +70,32 @@ class MainViewController: UIViewController {
                 
                 // Location name
                 var cityName = ""
-                if let city = placeMark.addressDictionary?["City"] as? String
-                {
-                    print(city)
+                if let city = placeMark.addressDictionary?["City"] as? String {
                     cityName = city
                 }
                 
                 var stateName = ""
                 if let state = placeMark.addressDictionary?["State"] as? String {
-                    print(state)
                     stateName = state
                 }
                 
                 let cityAndState = "\(cityName), \(stateName)"
                 
+                // Parse
+                let parser = WeatherParser()
+                let formattedCity = parser.parseCityForRequest(city: cityName)
+                
+                self.requestNewData(city: formattedCity, state: stateName)
+                
                 self.updateLocationLabel(with: cityAndState)
             })}
         }
+    
+    func requestNewData(city: String, state: String) {
+        let weatherRequest = WeatherRequest()
+        weatherRequest.requestWeather(forKey: .conditions, city: city, state: state)
+        weatherRequest.requestWeather(forKey: .hourly, city: city, state: state)
+    }
     
     func updateLocationLabel(with string: String) {
         DispatchQueue.global().async {
@@ -93,7 +106,6 @@ class MainViewController: UIViewController {
     }
     
     func updateTempLabel() {
-        
         if let tempValues = UserDefaults.standard.value(forKey: "CurrentTemperatureValues") as? NSDictionary {
             let english = tempValues.value(forKey: "english") as! String
             let metric = tempValues.value(forKey: "metric") as! String
@@ -116,9 +128,16 @@ class MainViewController: UIViewController {
     
     // MARK: - WeatherRequests
     func requestWeather() {
+        
+        //TODO: Remove Placeholder values
+        let city = "Kansas_City"
+        let state = "MO"
+        
+        
+        
         let weatherRequest = WeatherRequest()
-        weatherRequest.requestWeather(forKey: .conditions)
-        weatherRequest.requestWeather(forKey: .hourly)
+        weatherRequest.requestWeather(forKey: .conditions, city: city, state: state)
+        weatherRequest.requestWeather(forKey: .hourly, city: city, state: state)
     }
     
     // MARK: - Notifications

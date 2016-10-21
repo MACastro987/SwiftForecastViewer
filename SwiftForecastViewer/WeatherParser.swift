@@ -101,4 +101,25 @@ class WeatherParser {
         
         return forecastData(today: todayForecast, tomorrow: tomorrowForecast)
     }
+    
+    func parseCityForRequest(city: String) -> String {
+        let cityString = city as NSString
+        let cityFormatted = cityString.replacingOccurrences(of: " ", with: "_")
+        
+        return cityFormatted
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
