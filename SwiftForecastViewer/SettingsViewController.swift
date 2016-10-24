@@ -17,7 +17,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupTextView()
+        self.setupTextField()
         self.setupSegmentedControl()
         self.setupVisualEffects()
     }
@@ -50,7 +50,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     }
     
     // MARK: - Text Field
-    func setupTextView() {
+    func setupTextField() {
         textField.layer.cornerRadius = 10
         textField.text = "Enter Your Zip Code"
         textField.textColor = UIColor.lightGray
@@ -60,6 +60,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(textField)
     }
     
+    // 'done' button view for keyboard
     func accessoryView () -> UIView {
         let view = UIView()
         view.backgroundColor = UIColor.clear
@@ -87,6 +88,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.text = ""
+        textField.textColor = UIColor.black
     }
  
     // MARK: Tap Gesture
