@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()        
-        self.requestWeather()
+//        self.requestWeather()
         self.setupNotifications()
     }
     
