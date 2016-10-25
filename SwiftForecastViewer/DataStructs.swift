@@ -13,6 +13,7 @@ struct currentDisplayData {
     let metric: String
     let cityAndState: String
     let weather: String
+    let coolColor: Bool
 }
 
 struct hourData {

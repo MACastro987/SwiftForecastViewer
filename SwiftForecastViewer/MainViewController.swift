@@ -20,26 +20,10 @@ class MainViewController: UIViewController {
     let reuseIdentifier = "MainCell"
     var isFahrenheit = true
     
-    // warmColor : 0xFF9800
-    // coolColor : 0x03A9F4
-    
-    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
-        return UIColor(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
-        )
-    }
-    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()        
         self.setupNotifications()
-        
-        //testing
-//        self.view.backgroundColor = UIColorFromRGB(rgbValue: 0xFF9800)
-        self.view.backgroundColor = UIColorFromRGB(rgbValue: 0x03A9F4)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +31,7 @@ class MainViewController: UIViewController {
         
     }
     
-    // MARK: - Unwind
+    // MARK: - Unwind From Settings
     @IBAction func unwindWithUnitsOfMeasure (sender: UIStoryboardSegue) {
         
         if sender.source is SettingsViewController {
@@ -140,42 +124,53 @@ class MainViewController: UIViewController {
                     self.tempLabel.text = temparature
                 }
             }
+
         }
-    }
-    
-    // MARK: - WeatherRequests
-    func requestWeather() {
-        
-        //TODO: Remove Placeholder values
-        let city = "Kansas_City"
-        let state = "MO"
-        
-        
-        
-        let weatherRequest = WeatherRequest()
-        weatherRequest.requestWeather(forKey: .conditions, city: city, state: state)
-        weatherRequest.requestWeather(forKey: .hourly, city: city, state: state)
     }
     
     // MARK: - Notifications
     func setupNotifications() {
+        
         // Background Labels
         let backgroundLabelDataNotif = Notification.Name("UpdateBackground")
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateBackgroundUI(notification:)), name: backgroundLabelDataNotif, object: nil)
+        
         // CollectionView Data
         let collectionViewDataNotif = Notification.Name("UpdateCollectionView")
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateCollectionView(notification:)), name: collectionViewDataNotif, object: nil)
     }
     
+    // Notifications Helpers
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
     func updateBackgroundUI(notification: Notification) {
         let currentArray: currentDisplayData = notification.object as! currentDisplayData
+        
+        let isCool = currentArray.coolColor
         
         DispatchQueue.global().async {
             DispatchQueue.main.async {
                 self.tempLabel.text = currentArray.english
                 self.weatherLabel.text = currentArray.weather
                 self.locationLabel.text = currentArray.cityAndState
+                self.setBackgroundColor(cool: isCool)
             }
+        }
+    }
+    
+    func setBackgroundColor(cool: Bool) {
+        switch cool {
+        case true:
+            self.view.backgroundColor = UIColorFromRGB(rgbValue: 0x03A9F4) // coolColor
+        case false:
+            self.view.backgroundColor = UIColorFromRGB(rgbValue: 0xFF9800) // warmColor
         }
     }
     

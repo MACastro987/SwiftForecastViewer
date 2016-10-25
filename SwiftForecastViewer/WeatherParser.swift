@@ -23,9 +23,14 @@ class WeatherParser {
         
         guard let weather = observe["weather"] as? String else { return nil }
         
+        var coolColor = true
         var english = ""
         if let fahrenheit = observe["temp_f"] as? Float {
             english = formatTemperature(temperature: fahrenheit)
+            
+            if fahrenheit > 73 {
+                coolColor = false
+            }
         }
         
         var metric = ""
@@ -33,7 +38,7 @@ class WeatherParser {
             metric = formatTemperature(temperature: celcius)
         }
 
-        return currentDisplayData(english: english, metric: metric, cityAndState: full, weather: weather)
+        return currentDisplayData(english: english, metric: metric, cityAndState: full, weather: weather, coolColor: coolColor)
     }
     
     // Current Data Helper
