@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import CoreLocation
 
+
 class MainViewController: UIViewController {
     
     @IBOutlet weak var tempLabel: UILabel!
@@ -18,11 +19,27 @@ class MainViewController: UIViewController {
         
     let reuseIdentifier = "MainCell"
     var isFahrenheit = true
-        
+    
+    // warmColor : 0xFF9800
+    // coolColor : 0x03A9F4
+    
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()        
-//        self.requestWeather()
         self.setupNotifications()
+        
+        //testing
+//        self.view.backgroundColor = UIColorFromRGB(rgbValue: 0xFF9800)
+        self.view.backgroundColor = UIColorFromRGB(rgbValue: 0x03A9F4)
     }
     
     override func viewWillAppear(_ animated: Bool) {
