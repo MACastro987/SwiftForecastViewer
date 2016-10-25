@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             print("Found user's location: \(location)")
             
             self.reverseGeocode(location: location)
+            
+            manager.stopUpdatingLocation()
         }
     }
     
