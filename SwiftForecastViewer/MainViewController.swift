@@ -191,7 +191,23 @@ extension MainViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        
+        let insetViewController: MainCellCollectionViewController = self.storyboard?.instantiateViewController(withIdentifier: "InsetViewController") as! MainCellCollectionViewController
+        
+        let itemIndex = indexPath.row + indexPath.section
+        
+        if itemIndex == 0 {
+            insetViewController.isTodayForecast = true
+        } else if itemIndex == 1 {
+            insetViewController.isTodayForecast = false
+        } else {
+            print("Error setting cellForItemAt indexPath")
+        }
+        
+        self.addChildViewController(insetViewController)
+        cell.addSubview((insetViewController.view)!)
         
         return cell
     }
