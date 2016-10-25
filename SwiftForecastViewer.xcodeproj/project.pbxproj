@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A239B241DBFFE0700F5B2C1 /* HeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A239B231DBFFE0700F5B2C1 /* HeaderReusableView.swift */; };
 		3A2D61F81DBFDC2400C7FCD0 /* MainCellCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D61F71DBFDC2400C7FCD0 /* MainCellCollectionViewController.swift */; };
 		3A3A056D1DA5CD4D006706B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A056C1DA5CD4D006706B2 /* AppDelegate.swift */; };
 		3A3A056F1DA5CD4D006706B2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A056E1DA5CD4D006706B2 /* MainViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A239B231DBFFE0700F5B2C1 /* HeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderReusableView.swift; sourceTree = "<group>"; };
 		3A2D61F71DBFDC2400C7FCD0 /* MainCellCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainCellCollectionViewController.swift; sourceTree = "<group>"; };
 		3A3A05691DA5CD4D006706B2 /* SwiftForecastViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftForecastViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A3A056C1DA5CD4D006706B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				3A2D61F71DBFDC2400C7FCD0 /* MainCellCollectionViewController.swift */,
+				3A239B231DBFFE0700F5B2C1 /* HeaderReusableView.swift */,
 			);
 			name = MainCell;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 			files = (
 				3A3A056F1DA5CD4D006706B2 /* MainViewController.swift in Sources */,
 				3A2D61F81DBFDC2400C7FCD0 /* MainCellCollectionViewController.swift in Sources */,
+				3A239B241DBFFE0700F5B2C1 /* HeaderReusableView.swift in Sources */,
 				3A3A056D1DA5CD4D006706B2 /* AppDelegate.swift in Sources */,
 				3AB454731DA827470084544C /* DataStructs.swift in Sources */,
 				3A3A059B1DA5D907006706B2 /* SettingsViewController.swift in Sources */,

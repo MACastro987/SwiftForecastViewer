@@ -127,9 +127,25 @@
                                 </view>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DayNameView" id="Eaa-8d-8GW">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DayNameView" id="Eaa-8d-8GW" customClass="HeaderReusableView" customModule="SwiftForecastViewer" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxb-E1-hYS">
+                                    <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="23"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="wxb-E1-hYS" firstAttribute="centerX" secondItem="Eaa-8d-8GW" secondAttribute="centerX" id="IVa-aA-3Pg"/>
+                                <constraint firstAttribute="leadingMargin" secondItem="wxb-E1-hYS" secondAttribute="leading" id="Rpw-dW-5ls"/>
+                                <constraint firstItem="wxb-E1-hYS" firstAttribute="centerY" secondItem="Eaa-8d-8GW" secondAttribute="centerY" id="nxX-Ux-iH2"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="wxb-E1-hYS" secondAttribute="trailing" id="yN8-MC-ciM"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="dayLabel" destination="wxb-E1-hYS" id="DdZ-dV-nxT"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="L2q-Bv-Gcz" id="6rP-xQ-sH2"/>
@@ -139,7 +155,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fDQ-Ki-hom" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="902" y="374"/>
+            <point key="canvasLocation" x="901.60000000000002" y="373.76311844077964"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="P2I-Zh-VdC">
