@@ -66,7 +66,15 @@ class MainCellCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let dayNameView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "DayNameView", for: indexPath)
+        let dayNameView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "DayNameView", for: indexPath) as! HeaderReusableView
+        
+        if !isTodayForecast {
+            dayNameView.dayLabel.text = "Tomorrow"
+        } else {
+            dayNameView.dayLabel.text = "Today"
+        }
+        
+        print(kind)
         
         return dayNameView
     }

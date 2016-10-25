@@ -27,12 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        manager.stopUpdatingLocation()
+        
         if let location = locations.first {
             print("Found user's location: \(location)")
             
             self.reverseGeocode(location: location)
-            
-            manager.stopUpdatingLocation()
         }
     }
     
