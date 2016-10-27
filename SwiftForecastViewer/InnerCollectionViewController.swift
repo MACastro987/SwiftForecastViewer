@@ -51,14 +51,21 @@ class InnerCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        if section == 1 {
+            return CGSize.zero
+        } else {
+            return CGSize(width: collectionView.frame.size.width, height: 50.0)
+        }
+    }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         print(indexPath)
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InnerCell
-        
-        let itemIndex = indexPath.row + (indexPath.section * 4)
         
         //testing
         let index = indexPath.row + indexPath.section

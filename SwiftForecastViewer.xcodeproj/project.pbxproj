@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3A239B241DBFFE0700F5B2C1 /* HeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A239B231DBFFE0700F5B2C1 /* HeaderReusableView.swift */; };
-		3A239B261DC0B88600F5B2C1 /* InsetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A239B251DC0B88600F5B2C1 /* InsetCollectionViewCell.swift */; };
 		3A239B291DC0D34000F5B2C1 /* InnerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A239B281DC0D34000F5B2C1 /* InnerCollectionViewController.swift */; };
 		3A239B2B1DC0FCE900F5B2C1 /* InnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A239B2A1DC0FCE900F5B2C1 /* InnerCell.swift */; };
 		3A239B2D1DC0FD4F00F5B2C1 /* DayNameReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A239B2C1DC0FD4F00F5B2C1 /* DayNameReusableView.swift */; };
@@ -45,7 +44,6 @@
 
 /* Begin PBXFileReference section */
 		3A239B231DBFFE0700F5B2C1 /* HeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderReusableView.swift; sourceTree = "<group>"; };
-		3A239B251DC0B88600F5B2C1 /* InsetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetCollectionViewCell.swift; sourceTree = "<group>"; };
 		3A239B281DC0D34000F5B2C1 /* InnerCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InnerCollectionViewController.swift; sourceTree = "<group>"; };
 		3A239B2A1DC0FCE900F5B2C1 /* InnerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InnerCell.swift; sourceTree = "<group>"; };
 		3A239B2C1DC0FD4F00F5B2C1 /* DayNameReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayNameReusableView.swift; sourceTree = "<group>"; };
@@ -94,12 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3A239B271DC0B89300F5B2C1 /* InsetCell */ = {
+		3A13F6931DC2ABFB00433FCF /* InnerCollection */ = {
 			isa = PBXGroup;
 			children = (
-				3A239B251DC0B88600F5B2C1 /* InsetCollectionViewCell.swift */,
+				3A239B281DC0D34000F5B2C1 /* InnerCollectionViewController.swift */,
+				3A239B2A1DC0FCE900F5B2C1 /* InnerCell.swift */,
+				3A239B2C1DC0FD4F00F5B2C1 /* DayNameReusableView.swift */,
 			);
-			name = InsetCell;
+			name = InnerCollection;
 			sourceTree = "<group>";
 		};
 		3A2D61F61DBFDB9600C7FCD0 /* MainCell */ = {
@@ -107,7 +107,6 @@
 			children = (
 				3A2D61F71DBFDC2400C7FCD0 /* MainCellCollectionViewController.swift */,
 				3A239B231DBFFE0700F5B2C1 /* HeaderReusableView.swift */,
-				3A239B271DC0B89300F5B2C1 /* InsetCell */,
 			);
 			name = MainCell;
 			sourceTree = "<group>";
@@ -168,6 +167,7 @@
 			children = (
 				3A3A05A01DA6A69D006706B2 /* Main */,
 				3A2D61F61DBFDB9600C7FCD0 /* MainCell */,
+				3A13F6931DC2ABFB00433FCF /* InnerCollection */,
 				3AB454711DA81F150084544C /* Settings */,
 			);
 			name = Controller;
@@ -178,9 +178,6 @@
 			children = (
 				3A3A05701DA5CD4D006706B2 /* Main.storyboard */,
 				3A3A05751DA5CD4D006706B2 /* LaunchScreen.storyboard */,
-				3A239B281DC0D34000F5B2C1 /* InnerCollectionViewController.swift */,
-				3A239B2A1DC0FCE900F5B2C1 /* InnerCell.swift */,
-				3A239B2C1DC0FD4F00F5B2C1 /* DayNameReusableView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -356,7 +353,6 @@
 				3AB454731DA827470084544C /* DataStructs.swift in Sources */,
 				3A3A059B1DA5D907006706B2 /* SettingsViewController.swift in Sources */,
 				3A3A05A71DA6CC14006706B2 /* WeatherParser.swift in Sources */,
-				3A239B261DC0B88600F5B2C1 /* InsetCollectionViewCell.swift in Sources */,
 				3A3A05AC1DA7CA91006706B2 /* WeatherRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
