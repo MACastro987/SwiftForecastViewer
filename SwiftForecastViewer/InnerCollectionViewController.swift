@@ -60,6 +60,16 @@ class InnerCollectionViewController: UICollectionViewController {
             return CGSize(width: collectionView.frame.size.width, height: 50.0)
         }
     }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        let screenRect = UIScreen.main.bounds
+        let screenWidth = screenRect.width
+        let cellWidth = screenWidth/5 // Making four equal columns
+        let size: CGSize = CGSize(width: cellWidth, height: cellWidth)
+        
+        return size
+    }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
