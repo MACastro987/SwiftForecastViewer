@@ -28,12 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        manager.stopUpdatingLocation()
         
         if let location = locations.first {
             print("Found user's location: \(location)")
             
             self.reverseGeocode(location: location)
+            
+//            manager.stopUpdatingLocation()
+            manager.stopUpdatingHeading()
         }
     }
     
@@ -45,9 +47,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             var placeMark: CLPlacemark!
             placeMark = placemarks?[0]
             
-            // Address dictionary
-            print(placeMark.addressDictionary)
-            
             guard let state = placeMark.addressDictionary?["State"] as? String else { return }
             
             guard let city = placeMark.addressDictionary?["City"] as? String else { return }
@@ -56,10 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             if (!city.isEmpty) && (!state.isEmpty) {
                 let cityFormatted = formatter.parseCityForRequest(city: city)
                 self.requestWeather(city: cityFormatted as String, state: state as String)
-                print(cityFormatted)
-                print(state)
             }
         })
+    }
+    
+    func parseCity(city: String) -> String {
+        let parser = WeatherParser()
+        let formattedCityString = parser.parseCityForRequest(city: city)
+        
+        return formattedCityString
     }
     
     func requestWeather(city: String, state: String) {
@@ -71,14 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Failed to find user's location: \(error.localizedDescription)")
     }
-    
-    func parseCity(city: String) -> String {
-        let parser = WeatherParser()
-        let formattedCityString = parser.parseCityForRequest(city: city)
-        
-        return formattedCityString
-    }
-    
+
     func applicationWillResignActive(_ application: UIApplication) {
     }
 

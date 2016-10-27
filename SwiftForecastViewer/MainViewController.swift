@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("Main.isFahrenheit? : \(isFahrenheit)")
+        //print("Main.isFahrenheit? : \(isFahrenheit)")
         
     }
     
@@ -36,7 +36,7 @@ class MainViewController: UIViewController {
         
         if sender.source is SettingsViewController {
             let settings = sender.source as! SettingsViewController
-            print("settings.isFahrenheitSelecte : \(settings.isFahrenheitSelected)")
+            //print("settings.isFahrenheitSelecte : \(settings.isFahrenheitSelected)")
             
             if self.isFahrenheit != settings.isFahrenheitSelected {
                 self.isFahrenheit = settings.isFahrenheitSelected
@@ -67,7 +67,7 @@ class MainViewController: UIViewController {
                 placeMark = placeArray?[0]
                 
                 // Address dictionary
-                print("Address Dict : \(placeMark.addressDictionary)")
+                //print("Address Dict : \(placeMark.addressDictionary)")
                 
                 // Location name
                 var cityName = ""

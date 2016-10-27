@@ -54,7 +54,6 @@ struct WeatherRequest {
         switch givenCase {
             
         case .conditions:
-            print("fetching current conditions")
             let currentDisplayData = parser.currentDisplayDataFrom(json: json!)
             self.notifyCurrentDiplay(data: currentDisplayData!)
             
@@ -67,7 +66,6 @@ struct WeatherRequest {
             defaults.set(temps, forKey: "CurrentTemperatureValues")
             
         case .hourly:
-            print("fetching hourly forecast")
             let forecastData = parser.forecastDataFrom(json: json!)
             self.notifyCollectionView(forecast: forecastData)
         }
