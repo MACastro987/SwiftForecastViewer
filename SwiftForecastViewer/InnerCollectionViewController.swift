@@ -13,8 +13,8 @@ private let reuseIdentifier = "InnerCell"
 class InnerCollectionViewController: UICollectionViewController {
     
     public var isTodayForecast = true
-    var forecast = [hourData]()
-    var newForecast = false
+    var today = [hourData]()
+    var tomorrow = [hourData]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +30,15 @@ class InnerCollectionViewController: UICollectionViewController {
         guard let forecasts = notification.object as? forecastData else { return }
         
         if !isTodayForecast {
-            let tomorrow = forecasts.tomorrow
-            updateCollection(forecastArray: tomorrow)
-        } else {
-            let today = forecasts.today
+            today = forecasts.today
             updateCollection(forecastArray: today)
+        } else {
+            tomorrow = forecasts.tomorrow
+            updateCollection(forecastArray: tomorrow)
         }
     }
     
     func updateCollection(forecastArray: [hourData]) {
-        forecast = forecastArray
-        newForecast = true
         collectionView?.reloadData()
     }
 
@@ -61,13 +59,19 @@ class InnerCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InnerCell
         
         let itemIndex = indexPath.row + (indexPath.section * 4)
+        
+        //testing
+        let index = indexPath.row + indexPath.section
+        print(index)
+        
+        
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
         
-        if !(forecast.isEmpty) {
-            self.asyncUpdateCollection(for: cell, as: itemIndex)
+        if !(today.isEmpty) {
+            self.asyncUpdateCollection(for: cell, array: today, itemIndex: index)
         }
         else {
-            print("No new forecast datea")
+            self.asyncUpdateCollection(for: cell, array: tomorrow, itemIndex: index)
         }
         
         //testing
@@ -76,16 +80,19 @@ class InnerCollectionViewController: UICollectionViewController {
         return cell
     }
     
-    func asyncUpdateCollection(for cell:InnerCell, as itemIndex: Int) {
+    func asyncUpdateCollection(for cell:InnerCell, array: [hourData], itemIndex: Int) {
         DispatchQueue.global().async {
             DispatchQueue.main.async {
                 
-                let hour = self.forecast[itemIndex]
-                cell.time.text = hour.time
-                cell.temperature.text = hour.temp
-                
-                let data = NSData(contentsOf: hour.icon)
-                cell.icon.image = UIImage(data: data as! Data)
+                if itemIndex < array.count {
+                    
+                    let hour = array[itemIndex]
+                    cell.time.text = hour.time
+                    cell.temperature.text = hour.temp
+                    
+                    let data = NSData(contentsOf: hour.icon)
+                    cell.icon.image = UIImage(data: data as! Data)
+                }
             }
         }
     }

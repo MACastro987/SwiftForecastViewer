@@ -194,7 +194,7 @@ extension MainViewController: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
-        let insetViewController: MainCellCollectionViewController = self.storyboard?.instantiateViewController(withIdentifier: "InsetViewController") as! MainCellCollectionViewController
+        let insetViewController = self.storyboard?.instantiateViewController(withIdentifier: "InnerCollectionController") as! InnerCollectionViewController
         
         let itemIndex = indexPath.row + indexPath.section
         
@@ -212,3 +212,14 @@ extension MainViewController: UICollectionViewDataSource {
         return cell
     }
 }
+
+
+
+
+
+
+
+
+
+
+
