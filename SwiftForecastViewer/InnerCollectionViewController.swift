@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "InnerCell"
 
-class InnerCollectionViewController: UICollectionViewController {
+class InnerCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     public var isTodayForecast = true
     var today = [hourData]()
@@ -18,8 +18,9 @@ class InnerCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
-        // testing
         // CollectionView Data
         let collectionViewDataNotif = Notification.Name("UpdateCollectionView")
         NotificationCenter.default.addObserver(self, selector: #selector(self.updateCollectionView(notification:)), name: collectionViewDataNotif, object: nil)
@@ -52,7 +53,7 @@ class InnerCollectionViewController: UICollectionViewController {
         return 4
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         if section == 1 {
             return CGSize.zero
@@ -61,7 +62,7 @@ class InnerCollectionViewController: UICollectionViewController {
         }
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let screenRect = UIScreen.main.bounds
         let screenWidth = screenRect.width
@@ -73,14 +74,9 @@ class InnerCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        print(indexPath)
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InnerCell
         
-        //testing
         let index = indexPath.row + indexPath.section
-        print(index)
-        
         
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
         
@@ -114,27 +110,21 @@ class InnerCollectionViewController: UICollectionViewController {
         }
     }
     
-    
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        switch kind {
+        if kind == UICollectionElementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath as IndexPath) as! DayNameReusableView
             
-        case UICollectionElementKindSectionHeader:
-            
-            let headerView: HeaderReusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath as IndexPath) as! HeaderReusableView
-            
-            headerView.dayLabel.text = "Test"
+            if isTodayForecast {
+                headerView.dayLabel.text = "Today"
+            } else {
+                headerView.dayLabel.text = "Tomorrow"
+            }
             
             return headerView
-            
-        case UICollectionElementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath as IndexPath) 
-            
-            footerView.backgroundColor = UIColor.green;
-            return footerView
-            
-        default:
-            assert(false, "Unexpected element kind")
+        }
+        else {
+            assert(false, "error setting element properties")
         }
     }
 }
