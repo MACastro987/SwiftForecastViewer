@@ -86,9 +86,6 @@ class InnerCollectionViewController: UICollectionViewController, UICollectionVie
         else {
             self.asyncUpdateCollection(for: cell, array: tomorrow, itemIndex: index)
         }
-        
-        //testing
-        cell.backgroundColor = UIColor.lightGray
     
         return cell
     }
@@ -114,6 +111,24 @@ class InnerCollectionViewController: UICollectionViewController, UICollectionVie
         
         if kind == UICollectionElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HeaderView", for: indexPath as IndexPath) as! DayNameReusableView
+            
+            //Add grey borders
+            let topBorder = CALayer()
+            let topWidth = CGFloat(1.0)
+            topBorder.borderColor = UIColor.darkGray.cgColor
+            topBorder.frame = CGRect(x: 0, y: 0, width:  headerView.frame.size.width, height: headerView.frame.size.height)
+            topBorder.borderWidth = topWidth
+            headerView.layer.addSublayer(topBorder)
+            headerView.layer.masksToBounds = true
+            
+            let bottomBorder = CALayer()
+            let bottomWidth = CGFloat(2.0)
+            bottomBorder.borderColor = UIColor.darkGray.cgColor
+            bottomBorder.frame = CGRect(x: 0, y: headerView.frame.size.height - bottomWidth, width:  headerView.frame.size.width, height: headerView.frame.size.height)
+            bottomBorder.borderWidth = bottomWidth
+            headerView.layer.addSublayer(bottomBorder)
+            headerView.layer.masksToBounds = true
+            
             
             if isTodayForecast {
                 headerView.dayLabel.text = "Today"

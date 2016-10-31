@@ -52,7 +52,6 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OzR-60-fTY">
-                                <color key="backgroundColor" white="0.61639083059999999" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="10" id="sQY-U6-Qv5">
                                     <size key="itemSize" width="375" height="255"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -109,7 +108,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="sDM-mB-3hp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.015686274510000001" green="0.87058823529999996" blue="0.4431372549" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="10" id="RXE-Np-hpL">
                             <size key="itemSize" width="62" height="62"/>
                             <size key="headerReferenceSize" width="50" height="50"/>
@@ -132,7 +131,6 @@
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1t1-sr-PGF">
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="46" id="838-Oq-o5A"/>
                                                 <constraint firstAttribute="height" constant="21" id="aCN-yZ-8r6"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
@@ -142,7 +140,6 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMN-Si-mG9">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="FUO-0I-x9b"/>
-                                                <constraint firstAttribute="width" constant="46" id="PZt-PB-oK7"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -152,10 +149,12 @@
                                 </view>
                                 <constraints>
                                     <constraint firstItem="1t1-sr-PGF" firstAttribute="centerX" secondItem="dXq-HM-yGa" secondAttribute="centerX" id="RFx-Zg-hLz"/>
+                                    <constraint firstItem="1t1-sr-PGF" firstAttribute="width" secondItem="dXq-HM-yGa" secondAttribute="width" id="aab-E7-334"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="1t1-sr-PGF" secondAttribute="bottom" constant="-8" id="cRX-la-gmo"/>
                                     <constraint firstItem="Tby-eG-FP3" firstAttribute="centerX" secondItem="dXq-HM-yGa" secondAttribute="centerX" id="dno-p7-fWh"/>
                                     <constraint firstItem="EMN-Si-mG9" firstAttribute="centerX" secondItem="dXq-HM-yGa" secondAttribute="centerX" id="f06-zQ-MWy"/>
                                     <constraint firstItem="Tby-eG-FP3" firstAttribute="centerY" secondItem="dXq-HM-yGa" secondAttribute="centerY" id="oqm-Qv-Exy"/>
+                                    <constraint firstItem="EMN-Si-mG9" firstAttribute="width" secondItem="dXq-HM-yGa" secondAttribute="width" id="skC-eV-2H2"/>
                                     <constraint firstItem="EMN-Si-mG9" firstAttribute="top" secondItem="dXq-HM-yGa" secondAttribute="topMargin" constant="-8" id="zB1-gm-EcJ"/>
                                 </constraints>
                                 <connections>
