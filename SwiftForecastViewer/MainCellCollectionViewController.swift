@@ -23,7 +23,7 @@ class MainCellCollectionViewController: UICollectionViewController {
     }
     
     func updateCollectionView(notification: Notification) {
-        print(notification)
+//        print(notification)
     }
 
     override func didReceiveMemoryWarning() {
