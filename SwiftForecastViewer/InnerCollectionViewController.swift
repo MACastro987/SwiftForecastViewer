@@ -11,36 +11,15 @@ import UIKit
 private let reuseIdentifier = "InnerCell"
 
 class InnerCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
     public var isTodayForecast = true
-    var today = [hourData]()
-    var tomorrow = [hourData]()
+    var forecastData = [hourData]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-
-        // CollectionView Data
-        let collectionViewDataNotif = Notification.Name("UpdateCollectionView")
-        NotificationCenter.default.addObserver(self, selector: #selector(self.updateCollectionView(notification:)), name: collectionViewDataNotif, object: nil)
-    }
-
-    func updateCollectionView(notification: Notification) {
-        
-        guard let forecasts = notification.object as? forecastData else { return }
-        
-        if !isTodayForecast {
-            today = forecasts.today
-            updateCollection(forecastArray: today)
-        } else {
-            tomorrow = forecasts.tomorrow
-            updateCollection(forecastArray: tomorrow)
-        }
     }
     
     func updateCollection(forecastArray: [hourData]) {
-        collectionView?.reloadData()
+        forecastData = forecastArray
     }
 
     // MARK: UICollectionViewDataSource
@@ -54,9 +33,9 @@ class InnerCollectionViewController: UICollectionViewController, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
         if section == 1 {
-            return CGSize.zero
+            return CGSize.zero  // Remove header for second section
+
         } else {
             return CGSize(width: collectionView.frame.size.width, height: 50.0)
         }
@@ -76,37 +55,27 @@ class InnerCollectionViewController: UICollectionViewController, UICollectionVie
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InnerCell
         
-        let index = indexPath.row + indexPath.section
+        let index = indexPath.row + (indexPath.section * 4)
         
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
         
-        if !(today.isEmpty) {
-            self.asyncUpdateCollection(for: cell, array: today, itemIndex: index)
-        }
-        else {
-            self.asyncUpdateCollection(for: cell, array: tomorrow, itemIndex: index)
+        DispatchQueue.global().async {
+            DispatchQueue.main.async {
+                
+                if index < self.forecastData.count {
+                    
+                    let hour = self.forecastData[index]
+                    let data = NSData(contentsOf: hour.icon)
+                    cell.icon.image = UIImage(data: data as! Data)
+                    cell.time.text = hour.time
+                    cell.temperature.text = hour.temp
+                }
+            }
         }
     
         return cell
     }
-    
-    func asyncUpdateCollection(for cell:InnerCell, array: [hourData], itemIndex: Int) {
-        DispatchQueue.global().async {
-            DispatchQueue.main.async {
-                
-                if itemIndex < array.count {
-                    
-                    let hour = array[itemIndex]
-                    cell.time.text = hour.time
-                    cell.temperature.text = hour.temp
-                    
-                    let data = NSData(contentsOf: hour.icon)
-                    cell.icon.image = UIImage(data: data as! Data)
-                }
-            }
-        }
-    }
-    
+
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if kind == UICollectionElementKindSectionHeader {

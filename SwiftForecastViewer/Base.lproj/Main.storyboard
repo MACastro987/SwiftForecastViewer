@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xfH-hO-TNq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="xfH-hO-TNq">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -92,6 +92,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionView" destination="OzR-60-fTY" id="Uvf-mf-rqO"/>
                         <outlet property="locationLabel" destination="xCE-uE-oIN" id="pX2-wS-b6r"/>
                         <outlet property="tempLabel" destination="gzz-Vg-EWa" id="dxK-Rh-kzR"/>
                         <outlet property="weatherLabel" destination="WoP-O3-Aqo" id="A7F-ug-15W"/>
@@ -105,7 +106,7 @@
         <scene sceneID="aPi-0n-nCu">
             <objects>
                 <collectionViewController storyboardIdentifier="InnerCollectionController" id="WKU-nd-aSP" customClass="InnerCollectionViewController" customModule="SwiftForecastViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="sDM-mB-3hp">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="sDM-mB-3hp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

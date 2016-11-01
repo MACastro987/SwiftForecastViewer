@@ -16,6 +16,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    var today = [hourData]()
+    var tomorrow = [hourData]()
+
         
     let reuseIdentifier = "MainCell"
     var isFahrenheit = true
@@ -65,9 +70,6 @@ class MainViewController: UIViewController {
                 // Place details
                 var placeMark: CLPlacemark!
                 placeMark = placeArray?[0]
-                
-                // Address dictionary
-                //print("Address Dict : \(placeMark.addressDictionary)")
                 
                 // Location name
                 var cityName = ""
@@ -175,7 +177,12 @@ class MainViewController: UIViewController {
     }
     
     func updateCollectionView(notification: Notification) {
-        print(notification)
+        if let forecasts = notification.object as? forecastData {
+            today = forecasts.today
+            tomorrow = forecasts.tomorrow
+            
+            collectionView.reloadData()
+        }
     }
 }
 
@@ -208,8 +215,14 @@ extension MainViewController: UICollectionViewDataSource {
         
         if itemIndex == 0 {
             insetViewController.isTodayForecast = true
+            if !today.isEmpty {
+                insetViewController.updateCollection(forecastArray: today)
+            }
         } else if itemIndex == 1 {
             insetViewController.isTodayForecast = false
+            if !tomorrow.isEmpty {
+                insetViewController.updateCollection(forecastArray: tomorrow)
+            }
         } else {
             print("Error setting cellForItemAt indexPath")
         }
@@ -220,14 +233,5 @@ extension MainViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
-
-
-
-
-
-
-
-
 
 
