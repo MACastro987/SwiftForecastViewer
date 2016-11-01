@@ -79,9 +79,35 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     }
     
     func doneAction () {
-        textField.resignFirstResponder()
         
-        // save input to userdefaults
+        //check length of string
+        //check characters are numbers
+        let input = textField.text
+        let forbiddenCharacters = NSCharacterSet.decimalDigits.inverted
+
+        
+        if (input!.characters.count == 5) && (input?.rangeOfCharacter(from: forbiddenCharacters) == nil) {
+            textField.resignFirstResponder()
+            self.saveInputToDefaults()
+        }
+        else if (input!.characters.count != 5) {
+            self.showInputAlert()
+        }
+        else if (input?.rangeOfCharacter(from: forbiddenCharacters) != nil) {
+            self.showInputAlert()
+        }
+    }
+    
+    func showInputAlert() {
+        let alert = UIAlertController(title: "Input Alert", message: "Exacatly five numbers are expected as input", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+            //Get new input
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func saveInputToDefaults() {
         let defaults = UserDefaults.standard
         defaults.set(textField.text, forKey: "ZipcodeInput")
     }
