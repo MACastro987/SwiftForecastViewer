@@ -206,6 +206,8 @@ extension MainViewController: UICollectionViewDataSource {
         let insetViewController = self.storyboard?.instantiateViewController(withIdentifier: "InnerCollectionController") as! InnerCollectionViewController
         if !isFahrenheit {
             insetViewController.isFahrenheit = false
+        } else if isFahrenheit {
+            insetViewController.isFahrenheit = true
         }
         
         let itemIndex = indexPath.row + indexPath.section

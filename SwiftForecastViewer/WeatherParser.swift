@@ -117,15 +117,3 @@ class WeatherParser {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
