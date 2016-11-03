@@ -13,6 +13,7 @@ private let reuseIdentifier = "InnerCell"
 class InnerCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     public var isTodayForecast = true
     var forecastData = [hourData]()
+    var isFahrenheit = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,25 +54,33 @@ class InnerCollectionViewController: UICollectionViewController, UICollectionVie
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InnerCell
-        
-        let index = indexPath.row + (indexPath.section * 4)
-        
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
         
-        DispatchQueue.global().async {
-            DispatchQueue.main.async {
-                
-                if index < self.forecastData.count {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InnerCell
+        let index = indexPath.row + (indexPath.section * 4)
+        
+        if !(self.forecastData.isEmpty) {
+            let hour = self.forecastData[index]
+            let data = NSData(contentsOf: hour.icon)
+            
+            var temp = hour.english
+            if !isFahrenheit {
+                temp = hour.metric
+            }
+            
+            DispatchQueue.global().async {
+                DispatchQueue.main.async {
                     
-                    let hour = self.forecastData[index]
-                    let data = NSData(contentsOf: hour.icon)
-                    cell.icon.image = UIImage(data: data as! Data)
-                    cell.time.text = hour.time
-                    cell.temperature.text = hour.temp
+                    if index < self.forecastData.count {
+                        
+                        cell.icon.image = UIImage(data: data as! Data)
+                        cell.time.text = hour.time
+                        cell.temperature.text = temp
+                    }
                 }
             }
         }
+        
     
         return cell
     }

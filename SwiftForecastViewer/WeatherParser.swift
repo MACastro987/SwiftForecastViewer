@@ -72,20 +72,24 @@ class WeatherParser {
             
             // Icon url
             let iconUrl = hourDict["icon_url"] as! String
-            let url = URL(string: iconUrl)
+            let url = URL(string: iconUrl)!
             
             // Temperature
             let temp = hourDict["temp"] as! NSDictionary
-            let englishTemp = temp["english"]
-            // Degree Symbol Formatting
-            let formattedTemp = "\(englishTemp!)\u{00B0}"
+            let english = self.addDegreeSymbol(stringIn: temp["english"] as! String)
+            let metric = self.addDegreeSymbol(stringIn: temp["metric"] as! String)
             
-            let data = hourData(day: day, time: time, temp: formattedTemp, icon: url!)
+            let data = hourData(day: day, time: time, english: english, metric: metric, icon: url)
             
             forecast.append(data)
         }
         
         return(hourDataByDayFrom(forecast: forecast))
+    }
+    
+    func addDegreeSymbol(stringIn: String) -> String {
+        let stringOut = "\(stringIn)\u{00B0}"
+        return stringOut
     }
     
     // Forecast Helper

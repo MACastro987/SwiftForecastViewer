@@ -19,7 +19,8 @@ struct currentDisplayData {
 struct hourData {
     let day: String
     let time: String
-    let temp: String
+    let english: String
+    let metric: String
     let icon: URL
 }
 
