@@ -45,12 +45,20 @@ class MainViewController: UIViewController {
     @IBAction func unwindWithUnitsOfMeasure (sender: UIStoryboardSegue) {
         
         if sender.source is SettingsViewController {
-            let settings = sender.source as! SettingsViewController
+            
+            let defaults = UserDefaults.standard
+            if let segIndex = defaults.value(forKey: "SegmentedControlIndexSelected") {
+                if (segIndex as! Int) == 1 {
+                    // Metric 
+                    self.isFahrenheit = false
+                }
+            }
+//            let settings = sender.source as! SettingsViewController
             //print("settings.isFahrenheitSelecte : \(settings.isFahrenheitSelected)")
             
-            if self.isFahrenheit != settings.isFahrenheitSelected {
-                self.isFahrenheit = settings.isFahrenheitSelected
-            }
+//            if self.isFahrenheit != settings.isFahrenheitSelected {
+//                self.isFahrenheit = settings.isFahrenheitSelected
+//            }
             
             // Update tempLabel with change in units
             self.updateTempLabel()
@@ -87,15 +95,12 @@ class MainViewController: UIViewController {
                     stateName = state
                 }
                 
-//                let cityAndState = "\(cityName), \(stateName)"
-                
                 // Parse
                 let parser = WeatherParser()
                 let formattedCity = parser.parseCityForRequest(city: cityName)
                 
                 self.requestNewData(city: formattedCity, state: stateName)
                 
-//                self.updateLocationLabel(with: cityAndState)
             })}
         }
     
@@ -104,14 +109,7 @@ class MainViewController: UIViewController {
         weatherRequest.requestWeather(forKey: .conditions, city: city, state: state)
         weatherRequest.requestWeather(forKey: .hourly, city: city, state: state)
     }
-    
-//    func updateLocationLabel(with string: String) {
-//        DispatchQueue.global().async {
-//            DispatchQueue.main.async {
-//                self.locationLabel.text = string
-//            }
-//        }
-//    }
+
     
     func updateTempLabel() {
         if let tempValues = UserDefaults.standard.value(forKey: "CurrentTemperatureValues") as? NSDictionary {

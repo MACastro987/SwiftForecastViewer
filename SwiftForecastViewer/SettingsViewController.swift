@@ -13,7 +13,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    public var isFahrenheitSelected = true
+    public var isFahrenheitSelected = Bool()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +29,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     }
     
     func setupSegmentedControl() {
+        // Initial state of 'Fahrehnheit' button corresponds to 'true'
+        isFahrenheitSelected = true
+        
         let attr = NSDictionary(object: UIFont(name: "Avenir Next", size: 16.0)!, forKey: NSFontAttributeName as NSCopying)
         self.segmentedControl.setTitleTextAttributes(attr as? [AnyHashable : Any], for: .normal)
     }
