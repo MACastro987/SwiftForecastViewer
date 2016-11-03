@@ -15,16 +15,13 @@ class WeatherParser {
     func currentDisplayDataFrom(json: [String: Any]?) -> currentDisplayData? {
         
         guard let json = json else { return nil }
-        
         guard let observe = json["current_observation"] as? [String: Any] else { return nil }
-        
         guard let location = observe["display_location"] as? [String: Any] else { return nil }
         guard let full = location["full"] as? String else { return nil }
-        
         guard let weather = observe["weather"] as? String else { return nil }
         
         var coolColor = true
-        var english = ""
+        var english = String()
         if let fahrenheit = observe["temp_f"] as? Float {
             english = formatTemperature(temperature: fahrenheit)
             
@@ -33,7 +30,7 @@ class WeatherParser {
             }
         }
         
-        var metric = ""
+        var metric = String()
         if let celcius = observe["temp_c"] as? Float {
             metric = formatTemperature(temperature: celcius)
         }

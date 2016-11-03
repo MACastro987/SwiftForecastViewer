@@ -23,7 +23,7 @@ class InnerCollectionViewController: UICollectionViewController, UICollectionVie
         forecastData = forecastArray
     }
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -59,7 +59,7 @@ class InnerCollectionViewController: UICollectionViewController, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! InnerCell
         let index = indexPath.row + (indexPath.section * 4)
         
-        if !(self.forecastData.isEmpty) {
+        if !(self.forecastData.isEmpty) && (index < self.forecastData.count) {
             let hour = self.forecastData[index]
             let data = NSData(contentsOf: hour.icon)
             
@@ -70,13 +70,10 @@ class InnerCollectionViewController: UICollectionViewController, UICollectionVie
             
             DispatchQueue.global().async {
                 DispatchQueue.main.async {
-                    
-                    if index < self.forecastData.count {
-                        
-                        cell.icon.image = UIImage(data: data as! Data)
-                        cell.time.text = hour.time
-                        cell.temperature.text = temp
-                    }
+                    cell.icon.image = UIImage(data: data as! Data)
+                    cell.time.text = hour.time
+                    cell.temperature.text = temp
+
                 }
             }
         }

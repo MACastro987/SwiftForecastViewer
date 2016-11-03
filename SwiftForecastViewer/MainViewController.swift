@@ -36,10 +36,7 @@ class MainViewController: UIViewController {
         defaults.set(0, forKey: "SegmentedControlIndexSelected")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        //print("Main.isFahrenheit? : \(isFahrenheit)")
-        
-    }
+    
     
     // MARK: - Unwind From Settings
     @IBAction func unwindWithUnitsOfMeasure (sender: UIStoryboardSegue) {
@@ -53,15 +50,6 @@ class MainViewController: UIViewController {
                     self.isFahrenheit = false
                 }
             }
-//            let settings = sender.source as! SettingsViewController
-            //print("settings.isFahrenheitSelecte : \(settings.isFahrenheitSelected)")
-            
-//            if self.isFahrenheit != settings.isFahrenheitSelected {
-//                self.isFahrenheit = settings.isFahrenheitSelected
-//            }
-            
-            // Update tempLabel with change in units
-            self.updateTempLabel()
             
             // Update locationLabel
             self.parseLocation()

@@ -120,12 +120,12 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         textField.textColor = UIColor.black
     }
  
-    // MARK: Tap Gesture
+    // MARK: - Tap Gesture
     @IBAction func handleTap(recognizer:UITapGestureRecognizer) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    // MARK: Semented Control
+    // MARK: - Semented Control
     @IBAction func segmentedControlTap(_ sender: AnyObject) {
         let index = segmentedControl.selectedSegmentIndex
         self.saveSelectedIndex(index: index)
