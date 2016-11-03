@@ -20,15 +20,13 @@ struct WeatherRequest {
     
     func requestWeather(forKey key: WeatherKeys, city: String, state: String) -> Void {
         
-        //let url = URL(string: "http://\(baseUrl)/api/\(apiKey)/\(currentWeatherkey)/q/\(state)/\(city).json")
-        
-        let testUrl = URL(string: "http://api.wunderground.com/api/4aa1b354ada978c6/\(key)/q/\(state)/\(city).json")
+        let url = URL(string: "http://api.wunderground.com/api/4aa1b354ada978c6/\(key)/q/\(state)/\(city).json")!
               
-        let req = NSMutableURLRequest(url: testUrl!)
+        let req = NSMutableURLRequest(url: url)
         URLSession.shared.dataTask(with: req as URLRequest) { data, response, error in
             if error != nil {
                 //Error
-                print(error?.localizedDescription)
+                print(error!.localizedDescription)
             } else {
                 //Success
                 //print(String(data: data!, encoding: String.Encoding.utf8))

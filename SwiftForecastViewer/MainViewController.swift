@@ -29,6 +29,11 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()        
         self.setupNotifications()
+        
+        // Set initial value of SettingsVC's SegController 
+        // to correspond with the initial value of teh isFahrenheit
+        let defaults = UserDefaults.standard
+        defaults.set(0, forKey: "SegmentedControlIndexSelected")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,7 +87,7 @@ class MainViewController: UIViewController {
                     stateName = state
                 }
                 
-                let cityAndState = "\(cityName), \(stateName)"
+//                let cityAndState = "\(cityName), \(stateName)"
                 
                 // Parse
                 let parser = WeatherParser()
@@ -90,7 +95,7 @@ class MainViewController: UIViewController {
                 
                 self.requestNewData(city: formattedCity, state: stateName)
                 
-                self.updateLocationLabel(with: cityAndState)
+//                self.updateLocationLabel(with: cityAndState)
             })}
         }
     
@@ -100,13 +105,13 @@ class MainViewController: UIViewController {
         weatherRequest.requestWeather(forKey: .hourly, city: city, state: state)
     }
     
-    func updateLocationLabel(with string: String) {
-        DispatchQueue.global().async {
-            DispatchQueue.main.async {
-                self.locationLabel.text = string
-            }
-        }
-    }
+//    func updateLocationLabel(with string: String) {
+//        DispatchQueue.global().async {
+//            DispatchQueue.main.async {
+//                self.locationLabel.text = string
+//            }
+//        }
+//    }
     
     func updateTempLabel() {
         if let tempValues = UserDefaults.standard.value(forKey: "CurrentTemperatureValues") as? NSDictionary {
@@ -154,12 +159,15 @@ class MainViewController: UIViewController {
     
     func updateBackgroundUI(notification: Notification) {
         let currentArray: currentDisplayData = notification.object as! currentDisplayData
-        
         let isCool = currentArray.coolColor
+        var temp = currentArray.english
+        if !isFahrenheit {
+            temp = currentArray.metric
+        }
         
         DispatchQueue.global().async {
             DispatchQueue.main.async {
-                self.tempLabel.text = currentArray.english
+                self.tempLabel.text = temp
                 self.weatherLabel.text = currentArray.weather
                 self.locationLabel.text = currentArray.cityAndState
                 self.setBackgroundColor(cool: isCool)
@@ -210,6 +218,9 @@ extension MainViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         
         let insetViewController = self.storyboard?.instantiateViewController(withIdentifier: "InnerCollectionController") as! InnerCollectionViewController
+        if !isFahrenheit {
+            insetViewController.isFahrenheit = false
+        }
         
         let itemIndex = indexPath.row + indexPath.section
         
