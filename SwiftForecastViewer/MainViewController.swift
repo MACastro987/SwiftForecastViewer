@@ -56,9 +56,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    // TODO: Encapsulate in Geocoder class
-    //************************************
-    
     func parseLocation() {
         // Get current zip code
         if let zipString = (UserDefaults.standard.value(forKey: "ZipcodeInput")) as? String {
@@ -143,19 +140,22 @@ class MainViewController: UIViewController {
         )
     }
     
+    var currentBackgroundData = currentDisplayData(english: nil, metric: nil, cityAndState: nil, weather: nil, coolColor: nil)
+    
     func updateBackgroundUI(notification: Notification) {
-        let currentArray: currentDisplayData = notification.object as! currentDisplayData
-        let isCool = currentArray.coolColor
-        var temp = currentArray.english
+        currentBackgroundData = notification.object as! currentDisplayData
+        
+        let isCool = currentBackgroundData.coolColor!
+        var temp = currentBackgroundData.english
         if !isFahrenheit {
-            temp = currentArray.metric
+            temp = currentBackgroundData.metric
         }
         
         DispatchQueue.global().async {
             DispatchQueue.main.async {
                 self.tempLabel.text = temp
-                self.weatherLabel.text = currentArray.weather
-                self.locationLabel.text = currentArray.cityAndState
+                self.weatherLabel.text = self.currentBackgroundData.weather
+                self.locationLabel.text = self.currentBackgroundData.cityAndState
                 self.setBackgroundColor(cool: isCool)
             }
         }
@@ -170,13 +170,16 @@ class MainViewController: UIViewController {
         }
     }
     
+    // Initialize an empty array to hold forecastData
+    var forecast = forecastData(today: nil, tomorrow: nil)
+    
     func updateCollectionView(notification: Notification) {
-        if let forecasts = notification.object as? forecastData {
-            today = forecasts.today
-            tomorrow = forecasts.tomorrow
-            
-            collectionView.reloadData()
-        }
+        
+        forecast = (notification.object as? forecastData)!
+        today = forecast.today!
+        tomorrow = forecast.tomorrow!
+        
+        collectionView.reloadData()
     }
 }
 

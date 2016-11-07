@@ -9,11 +9,11 @@
 import Foundation
 
 struct currentDisplayData {
-    let english: String
-    let metric: String
-    let cityAndState: String
-    let weather: String
-    let coolColor: Bool
+    let english: String?
+    let metric: String?
+    let cityAndState: String?
+    let weather: String?
+    let coolColor: Bool?
 }
 
 struct hourData {
@@ -25,6 +25,6 @@ struct hourData {
 }
 
 struct forecastData {
-    let today: Array<hourData>
-    let tomorrow: Array<hourData>
+    let today: Array<hourData>?
+    let tomorrow: Array<hourData>?
 }
