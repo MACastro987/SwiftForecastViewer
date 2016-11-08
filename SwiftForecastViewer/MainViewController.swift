@@ -36,8 +36,6 @@ class MainViewController: UIViewController {
         defaults.set(0, forKey: "SegmentedControlIndexSelected")
     }
     
-    
-    
     // MARK: - Unwind From Settings
     @IBAction func unwindWithUnitsOfMeasure (sender: UIStoryboardSegue) {
         
@@ -70,10 +68,16 @@ class MainViewController: UIViewController {
         // && location has not changed - Set in SettingsVC
         if unitsDidChange && (!(locationDidChange as! Bool)) {
             // Update units from stored value
+            // Background
             self.updateTempLabel()
-        } else {
-            // Location Changed
-            // request weather again
+            // CollectionView
+            // Reload CollectionView now that units of measure is set
+            self.collectionView.reloadData()
+            
+        }
+        else {
+            // Location changed
+            // Request weather again
             self.parseLocation()
         }
     }

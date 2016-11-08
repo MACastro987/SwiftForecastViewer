@@ -119,7 +119,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
             if (textField.text?.isEmpty)! || ((oldZip as? String == textField.text)) {
                 // Location did not change
                 defaults.set(false, forKey: "LocationDidChange")
-            } else {
+            }
+            else {
                 defaults.set(true, forKey: "LocationDidChange")
             }
         }
