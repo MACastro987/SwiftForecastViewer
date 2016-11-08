@@ -158,18 +158,3 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         defualts.set(index, forKey: "SegmentedControlIndexSelected")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

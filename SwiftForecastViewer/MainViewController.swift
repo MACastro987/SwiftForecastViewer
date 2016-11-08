@@ -140,7 +140,6 @@ class MainViewController: UIViewController {
                     self.tempLabel.text = temparature
                 }
             }
-
         }
     }
     
@@ -261,5 +260,3 @@ extension MainViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
-

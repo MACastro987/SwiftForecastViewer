@@ -115,5 +115,3 @@ class WeatherParser {
         return cityFormatted
     }
 }
-
-
