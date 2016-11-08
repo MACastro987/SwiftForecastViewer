@@ -112,6 +112,19 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     func saveInputToDefaults() {
         let defaults = UserDefaults.standard
+        
+        // Check if zip changed
+        // Set the UserDefault value accordingly
+        if let oldZip = defaults.value(forKey: "ZipcodeInput") {
+            if (textField.text?.isEmpty)! || ((oldZip as? String == textField.text)) {
+                // Location did not change
+                defaults.set(false, forKey: "LocationDidChange")
+            } else {
+                defaults.set(true, forKey: "LocationDidChange")
+            }
+        }
+        
+        
         defaults.set(textField.text, forKey: "ZipcodeInput")
     }
     
@@ -128,6 +141,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Semented Control
     @IBAction func segmentedControlTap(_ sender: AnyObject) {
         let index = segmentedControl.selectedSegmentIndex
+        
         self.saveSelectedIndex(index: index)
 
         if index == 0 {
@@ -139,6 +153,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     func saveSelectedIndex(index: Int) {
         let defualts = UserDefaults.standard
+        
         defualts.set(index, forKey: "SegmentedControlIndexSelected")
     }
 }

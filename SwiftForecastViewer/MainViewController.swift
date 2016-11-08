@@ -41,20 +41,45 @@ class MainViewController: UIViewController {
     // MARK: - Unwind From Settings
     @IBAction func unwindWithUnitsOfMeasure (sender: UIStoryboardSegue) {
         
+        var unitsDidChange = false
+        
         if sender.source is SettingsViewController {
             
             let defaults = UserDefaults.standard
             if let segIndex = defaults.value(forKey: "SegmentedControlIndexSelected") {
-                if (segIndex as! Int) == 1 {
-                    // Metric 
-                    self.isFahrenheit = false
+                
+                // Check unitsDidChange:
+                if (segIndex as! Bool) == self.isFahrenheit {
+                    unitsDidChange = true
+                    
+                    if (segIndex as! Int) != 0 {
+                        self.isFahrenheit = false
+                    } else {
+                        self.isFahrenheit = true
+                    }
                 }
             }
-            
-            // Update locationLabel
+        }
+        
+        let defaults = UserDefaults.standard
+        guard let locationDidChange = defaults.value(forKey: "LocationDidChange") else { return }
+        
+        print("locationDidChange : \(locationDidChange)")
+        
+        // if units have changed
+        // && location has not changed - Set in SettingsVC
+        if unitsDidChange && (!(locationDidChange as! Bool)) {
+            // Update units from stored value
+            self.updateTempLabel()
+        } else {
+            // Location Changed
+            // request weather again
             self.parseLocation()
         }
     }
+    
+    var city = String()
+    var state = String()
     
     func parseLocation() {
         // Get current zip code
@@ -69,22 +94,19 @@ class MainViewController: UIViewController {
                 var placeMark: CLPlacemark!
                 placeMark = placeArray?[0]
                 
-                // Location name
-                var cityName = ""
-                if let city = placeMark.addressDictionary?["City"] as? String {
-                    cityName = city
+                if let cityName = placeMark.addressDictionary?["City"] as? String {
+                    self.city = cityName
                 }
                 
-                var stateName = ""
-                if let state = placeMark.addressDictionary?["State"] as? String {
-                    stateName = state
+                if let stateName = placeMark.addressDictionary?["State"] as? String {
+                    self.state = stateName
                 }
                 
                 // Parse
                 let parser = WeatherParser()
-                let formattedCity = parser.parseCityForRequest(city: cityName)
+                self.city = parser.parseCityForRequest(city: self.city)
                 
-                self.requestNewData(city: formattedCity, state: stateName)
+                self.requestNewData(city: self.city, state: self.state)
                 
             })}
         }
